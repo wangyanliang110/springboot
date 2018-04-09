@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -22,6 +23,11 @@ public class CarService {
 
   public Car find(Integer id){
     return carMapper.findById(id);
+  }
+
+
+  public List<Car> find(String name, Date beginDate, Date endDate) {
+    return carMapper.findByParam(name, beginDate, endDate);
   }
 
   @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT,rollbackFor = Exception.class)
